@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class GreetingAppService {
-    public String helloGreeting(){
+    public String helloGreeting() {
         return "Hello World";
     }
 }
