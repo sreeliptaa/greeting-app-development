@@ -30,12 +30,6 @@ public class GreetingAppService {
         return "Hello World";
     }
 
-//    public GreetingAppEntity addGreeting(GreetingAppDto greetingAppDto) {
-//        GreetingAppEntity greetingAppEntity = new GreetingAppEntity();
-//        greetingAppEntity.setMessage(greetingAppDto.getMessage());
-//        return greetingAppRepository.save(greetingAppEntity);
-//    }
-
     /**
      * Purpose : To save the greeting message to the database
      *
@@ -69,5 +63,23 @@ public class GreetingAppService {
      */
     public List<GreetingAppEntity> greetingMessageList() {
         return greetingAppRepository.findAll();
+    }
+
+    /**
+     * Purpose : To edit the available greeting in the database
+     *
+     * @param id unique id of the greeting message
+     * @param greetingAppDTO greeting data from client
+     * @return edited greeting message
+     */
+    public String editMessage(int id, GreetingAppDto greetingAppDTO) {
+        Optional<GreetingAppEntity> greetingAppEntity = greetingAppRepository.findById(id);
+        if (greetingAppEntity.isPresent()) {
+            GreetingAppEntity greetingAppEntity1 = greetingAppEntity.get();
+            greetingAppEntity1.setMessage(greetingAppDTO.getMessage());
+            greetingAppRepository.save(greetingAppEntity1);
+            return "Greeting message edited successfully";
+        }
+        return "Cannot find greeting message with given id: " + id;
     }
 }

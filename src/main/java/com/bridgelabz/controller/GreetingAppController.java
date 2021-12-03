@@ -81,7 +81,7 @@ public class GreetingAppController {
      * @param greetingAppDto used to greeting data from client
      * @return greeting message added in database
      */
-    @PostMapping("/greetingMessage")
+    @PostMapping("/saveMessage")
     public GreetingAppEntity saveGreeting(
             @RequestBody GreetingAppDto greetingAppDto
     ) {
@@ -108,6 +108,17 @@ public class GreetingAppController {
     @GetMapping(value = "/allMessages")
     public List<GreetingAppEntity> messagesList() {
         return greetingAppService.greetingMessageList();
+    }
+
+    /**
+     * Purpose : To receive put request from client
+     * @param id unique id of the greeting message
+     * @return the edited greeting message
+     */
+    @PutMapping("/editMessage/{id}")
+    public String editMessage(@PathVariable int id,
+                              @RequestBody GreetingAppDto greetingAppDto){
+        return greetingAppService.editMessage(id,greetingAppDto);
     }
 
 }
