@@ -6,6 +6,7 @@ import com.bridgelabz.repository.GreetingAppRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 /**
@@ -59,5 +60,14 @@ public class GreetingAppService {
             return "The Greeting Message with id is found: " + id;
         }
         return "The Greeting Message with id is not Found: " + id;
+    }
+
+    /**
+     * Purpose : To list all the greeting messages store in the greeting repository
+     *
+     * @return the list of all greeting messages
+     */
+    public List<GreetingAppEntity> greetingMessageList() {
+        return greetingAppRepository.findAll();
     }
 }

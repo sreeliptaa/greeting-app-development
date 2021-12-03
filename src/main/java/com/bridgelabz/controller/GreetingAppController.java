@@ -6,6 +6,8 @@ import com.bridgelabz.service.GreetingAppService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 /**
  * Purpose : To demonstrate the various HTTP methods
  *
@@ -88,6 +90,7 @@ public class GreetingAppController {
 
     /**
      * Purpose : To get request from client
+     *
      * @param id unique id of the greeting message
      * @return greeting message with the unique id
      */
@@ -95,6 +98,16 @@ public class GreetingAppController {
     public String findMessageById(
             @PathVariable int id) {
         return greetingAppService.findGreetingMessageById(id);
+    }
+
+    /**
+     * Purpose: To get mapping from client
+     *
+     * @return List of all greeting messages
+     */
+    @GetMapping(value = "/allMessages")
+    public List<GreetingAppEntity> messagesList() {
+        return greetingAppService.greetingMessageList();
     }
 
 }
