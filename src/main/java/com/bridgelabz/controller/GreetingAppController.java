@@ -75,13 +75,26 @@ public class GreetingAppController {
 
     /**
      * Purpose : To get request from client to show message
+     *
      * @param greetingAppDto used to greeting data from client
      * @return greeting message added in database
      */
-    @PostMapping("/savemessage")
+    @PostMapping("/greetingMessage")
     public GreetingAppEntity saveGreeting(
             @RequestBody GreetingAppDto greetingAppDto
     ) {
         return greetingAppService.saveMessage(greetingAppDto);
     }
+
+    /**
+     * Purpose : To get request from client
+     * @param id unique id of the greeting message
+     * @return greeting message with the unique id
+     */
+    @GetMapping("/greetingMessage/{id}")
+    public String findMessageById(
+            @PathVariable int id) {
+        return greetingAppService.findGreetingMessageById(id);
+    }
+
 }

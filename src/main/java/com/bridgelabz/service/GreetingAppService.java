@@ -6,6 +6,8 @@ import com.bridgelabz.repository.GreetingAppRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 /**
  * Purpose : To implement all the methods in GreetingAppController
  *
@@ -27,6 +29,12 @@ public class GreetingAppService {
         return "Hello World";
     }
 
+//    public GreetingAppEntity addGreeting(GreetingAppDto greetingAppDto) {
+//        GreetingAppEntity greetingAppEntity = new GreetingAppEntity();
+//        greetingAppEntity.setMessage(greetingAppDto.getMessage());
+//        return greetingAppRepository.save(greetingAppEntity);
+//    }
+
     /**
      * Purpose : To save the greeting message to the database
      *
@@ -37,5 +45,19 @@ public class GreetingAppService {
         GreetingAppEntity greetingAppEntity = new GreetingAppEntity();
         greetingAppEntity.setMessage(greetingAppDto.getMessage());
         return greetingAppRepository.save(greetingAppEntity);
+    }
+
+    /**
+     * Purpose : To find the greeting message by id
+     *
+     * @param id : is given to greeting message by unique id
+     * @return checking greeting message is found or not
+     */
+    public String findGreetingMessageById(int id) {
+        Optional<GreetingAppEntity> greetingAppEntity = greetingAppRepository.findById(id);
+        if (greetingAppEntity.isPresent()) {
+            return "The Greeting Message with id is found: " + id;
+        }
+        return "The Greeting Message with id is not Found: " + id;
     }
 }
