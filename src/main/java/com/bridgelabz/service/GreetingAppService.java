@@ -68,7 +68,7 @@ public class GreetingAppService {
     /**
      * Purpose : To edit the available greeting in the database
      *
-     * @param id unique id of the greeting message
+     * @param id             unique id of the greeting message
      * @param greetingAppDTO greeting data from client
      * @return edited greeting message
      */
@@ -81,5 +81,20 @@ public class GreetingAppService {
             return "Greeting message edited successfully";
         }
         return "Cannot find greeting message with given id: " + id;
+    }
+
+    /**
+     * Purpose : To delete particular greeting message
+     *
+     * @param id unique id of the greeting message
+     * @return greeting message status is deleted or not
+     */
+    public String deleteMessage(int id) {
+        Optional<GreetingAppEntity> greetingAppEntity = greetingAppRepository.findById(id);
+        if (greetingAppEntity.isPresent()) {
+            greetingAppRepository.delete(greetingAppEntity.get());
+            return "Greeting Message deleted successfully";
+        }
+        return "Greeting Message does not exists with this id : " + id;
     }
 }

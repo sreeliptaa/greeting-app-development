@@ -121,4 +121,14 @@ public class GreetingAppController {
         return greetingAppService.editMessage(id,greetingAppDto);
     }
 
+    /**
+     * Purpose: To delete greeting message
+     * @param id unique id of the greeting message
+     * @return greeting message status is deleted or not
+     */
+    @DeleteMapping(value = "/deleteMessage")
+    public String deleteMessage(@RequestParam int id) {
+        return greetingAppService.deleteMessage(id);
+    }
+
 }
